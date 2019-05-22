@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  	<head>
+    	<meta charset="utf-8">
+    	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	<meta http-equiv="Cache-Control" content="no-cache">
+    	<meta http-equiv="Pragma" content="no-cache">
+    	<title>Control Panel (mini) | XVST/SayHello ver 0.0.3</title>
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&amp;subset=cyrillic-ext" rel="stylesheet">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+		<link rel="stylesheet" href="css/style.css">
+		<style type="text/css">
+        </style>
+  	</head>
+  	
+  	<body>
+        <div id="main-window">
+            <div id="panel">
+                <div class="col">
+                    <div id="p0" class="disable"><div class="scene"></div><div class="transition"></div></div>
+                    <div id="p3" class="disable"><div class="scene"></div><div class="transition"></div></div>
+                    <div id="p6" class="disable"><div class="scene"></div><div class="transition"></div></div>
+                </div>
+                <div class="col">
+                    <div id="p1" class="disable"><div class="scene"></div><div class="transition"></div></div>
+                    <div id="p4" class="disable"><div class="scene"></div><div class="transition"></div></div>
+                    <div id="p7" class="disable"><div class="scene"></div><div class="transition"></div></div>
+                </div>
+                <div class="col">
+                    <div id="p2" class="disable"><div class="scene"></div><div class="transition"></div></div>
+                    <div id="p5" class="disable"><div class="scene"></div><div class="transition"></div></div>
+                    <div id="p8" class="disable"><div class="scene"></div><div class="transition"></div></div>
+                </div>
+                <div class="col control">
+                    <!-- <div id="end-game"></div> //-->
+                    <div id="source-control"></div>
+                </div>
+            </div>
+            <div id="stream">
+                <div id="status" class="shutdown"></div>
+                <div id="console">
+                    <div class="highlight">
+                        <div class="dropframes">0DF</div>
+                        <div class="bandwidth">0Kbps</div>
+                        <div class="fps">0fps</div>
+                    </div>
+                    <div class="base-data">
+                        <div class="timecode">Timecode:<br/><b>00:00:00.000</b></div>
+                        <div class="totalframes">Total frames:<br/><b>0</b></div>
+                        <div class="strain">Strain:<br/><b>0</b></div>
+                    </div>
+                </div>
+                <div id="control" class="offline">
+                    <div id="stream-start-stop"  onclick="set_stream_start_stop()"><i class="fas fa-video"></i><b class="button-label">Stream</b></div>
+                    <div id="record-start-stop"  onclick="set_record_start_stop()"><i class="fas fa-circle"></i><b class="button-label">Record</b></div>
+                    <div id="microphone-on-off"  onclick="set_audio_mute_unmute('main-microphone')"><i class="fas fa-microphone"></i><b class="button-label">Microphone</b></div>
+                    <div id="global-sound-on-off" onclick="set_audio_mute_unmute('main-sound')"><i class="fas fa-volume-up"></i><b class="button-label">Global Sound</b></div>
+                </div>
+            </div>
+        </div>
+        <!-- modal windows -->
+        <!-- Transition selection -->
+        <div id="transition-select">
+            <div class="modal-window">
+                <div class="transition-selection">
+                    <h1>Choose OUT transition for current scene:</h1>
+                    <div id="transitions-list"></div>
+                    <h4>Please choose transition. When transition is choosed window is closed.</h4>
+                </div>
+            </div>
+        </div>
+
+        <!-- Client credentials -->
+        <div id="client-connection">
+            <div class="modal-window">
+                <div class="client-id-input">
+                    <h1>Good day Commander!</h1>
+                    <h5>Open Broadcast Software (OBS) web console version 0.0.9</h5>
+                    <p>Please enter address where OBS run. localhost if console run on the same computer.</p>
+                    <form id="obs-client-connect-data">
+                        <p id="error-place"></p>
+                        <div>
+                            <input id="obs_server_address" type="text" name="server_address" value="localhost" />
+                            <label for="obs_server_address">OBS address</label>
+                        </div>
+                        <div>
+                            <input id="obs_server_port" type="text" name="server_port" value="4444" />
+                            <label for="obs_server_port">OBS port</label>
+                        </div>
+                        <div>
+                            <input id="obs_server_password" type="password" name="server_password" />
+                            <label for="obs_server_password">Password (optional)</label>
+                        </div>
+                        <div>
+                            <input id="connect_to_client" type="button" name="connect" value="CONNECT" onclick="connect_to_obs()"/>
+                            <label for="connect_to_client">Press to connect</label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+  		<!-- jQuery and jQuery UI -->
+ 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+ 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  		
+		<!-- Momemnt JS (Working with second and time) -->
+        <script lang="text/javascript" src="js/moment.js"></script>
+        <script lang="text/javascript" src="js/sha256.min.js"></script>
+		
+    	<!-- main script -->
+        <script lang="text/javascript" src="js/obs_client.js"></script>
+	</body>
+ </html>

@@ -1,0 +1,574 @@
+		    ::-webkit-scrollbar {
+    		    width: 				0px;  			/* remove scrollbar space */
+    		    background: 		transparent;  	/* optional: just make scrollbar invisible */
+		    }
+		
+		    ::-webkit-scrollbar-thumb {				/* optional: show position indicator in red */
+    		    background: 		#FF0000;
+		    }
+		
+		    html, body {
+		        overflow: 			scroll;
+    		    overflow-x: 		hidden;
+			    height:				100%;
+		    }
+		
+		    body {
+                background-color: #273136;
+		 	    margin: 			0px auto; 
+			    padding: 			0px;
+		    }
+
+            /* PANEL-UI ============================================== */
+
+            #main-window {
+                width:              100%;
+                height:             100%;
+                position:           absolute;
+                z-index:            10;
+            }
+
+            #panel {
+                width:              100%;
+                height:             calc( 100% - 120px );
+            }
+
+            #stream {
+                width:              100%;
+                height:             120px;
+                background-color: #1d2528;
+            }
+
+            .col {
+			    position: 			relative;
+                float: 				left;
+			    display: 			block;
+                
+                height: 			100%;
+                width:              25%;
+            }
+
+            .col > div {
+                position:           relative;
+                float:              left;
+                display:            block;
+                width:              100%;
+                height:             33.3%;
+            }
+
+            .col > div > div {
+                position:           relative;
+                float:              left;
+                font-family: 		'Roboto', sans-serif;
+            }
+
+            .col > div > div.scene {
+                width:				calc( 60% - 32px );
+                height:             calc( 100% - 22px );
+                padding:            14px 10px 0 10px;
+                margin:             4px 0px 4px 7px;
+                border-radius:      6px 0px 0px 6px;
+            }
+
+            .col > div > div.transition {
+                width:				calc( 40% - 27px );
+                height:             calc( 100% - 26px );
+                padding:            10px 10px 0 10px;
+                margin:             4px 4px 4px 0px;
+                border-radius:      0px 6px 6px 0px;
+            }
+
+            .active > div.scene {
+                background-color: greenyellow;
+                color:            #000000;
+            }
+            
+            .active > div.transition {
+                background-image: url('../img/arrow-lightgreen.png');
+                background-repeat: no-repeat no-repeat;
+                background-position-x: left;
+                background-position-y: center;
+                background-color: #456613;
+                border: 			4px solid greenyellow;
+                color:            white;
+            }
+
+            .disable > div.scene {
+                background-color: #20292c;
+                color:            #20292c;
+            }
+            
+            .disable > div.transition {
+                background-color: #20292c;
+                border: 			4px solid #20292c;
+                color:            #20292c;
+            }
+
+            .standby > div.scene {
+                background-color: #0c0f10;
+                color:            #ffffff;
+            }
+
+            .standby > div.transition {
+                background-image: url('../img/arrow-darkblue.png');
+                background-repeat: no-repeat no-repeat;
+                background-position-x: left;
+                background-position-y: center;
+                background-color: #191f21;
+                border: 			4px solid #0c0f10;
+                color:            #b3cbcb;
+            }
+
+            .ready > div.scene {
+                background-color: green;
+                color:            #000000;
+            }      
+
+            .ready > div.transition {
+                background-image: url('../img/arrow-darkgreen.png');
+                background-repeat: no-repeat no-repeat;
+                background-position-x: left;
+                background-position-y: center;                
+                background-color: #006900;
+                border: 			4px solid green;
+                color:            #000000;
+            }      
+
+
+            .col > div > div > p {
+                margin:             0px 0px 5px 0px;
+            }
+
+            .col > div > div > b  {
+                margin:             0px 0px 0px 0px;
+            }
+
+            .col > div > div > p {
+                font-size:          10px;
+            }
+
+            .col > div > div.scene > b {
+                font-size:          18px;
+                text-transform:     uppercase;
+            }
+
+            .col > div > div.transition > b {
+                font-size:          14px;
+                text-transform:     uppercase;
+            }
+
+            #stream > #status, #stream > #console {
+                position:           relative;
+                float:              left;
+            }
+            
+            #status {
+                width: 5px;
+                height: 120px;
+            }
+
+            #status.shutdown {
+                background-color: red;
+            }
+
+            #status.ready {
+                background-color: greenyellow;
+            }
+
+            #status.stream {
+                background-color: cyan;
+            }
+
+            #console {
+                margin:             0px 0px 0px 20px;
+                top:                20px;
+                font-family: 		'Roboto', sans-serif;
+            }
+
+            #console > .highlight {
+                width:              450px;
+                color:            white;
+                font-size:          2.2em;
+            }
+
+            #console > .highlight > div {
+                position:           relative;
+                float:              left;
+                font-weight:        200;
+                width:              175px;
+            }
+
+            #console > .highlight > .fps {
+                width:              100px;
+            }
+
+            #console > .base-data {
+                width:              450px;
+            }
+
+            #console > .base-data > div {
+                font-size:          0.8em;
+                position:           relative;
+                float:              left;
+                color:            #5f5f6a;
+                width:              175px;
+            }
+
+            #console > .base-data > div > b {
+                color:           #8f8f9a;
+                font-size:          1.5em;
+                font-weight:        400;
+            }
+
+            #console > .base-data > .timecode,
+            #console > .base-data > .totalframes,
+            #console > .base-data > .strain {
+                font-weight:        200;
+            }
+
+            #console > .base-data > .strain {
+                width:              100px;
+            }
+
+            #stream > #control {
+                position:           relative;
+                float:              right;
+                width:              500px;
+                right:              0px;
+            }
+
+            #control > div {
+                position:           relative;
+                float:              right;
+                width:              112px;
+                height:             110px;
+                border: 			2px solid #39464b;
+                border-radius: 		4px;
+                margin:             3px 2px 5px 3px;
+                text-align:         center;
+            }
+            
+            #control > .on {
+                color: black;
+                background-color: greenyellow;
+                border: 			2px solid greenyellow;
+            }
+
+            #control > .wait {
+                color: black;
+                background-color: gold;
+                border: 			2px solid gold;
+            }
+
+            .offline {
+                color: 			  #39464b;
+            }
+
+            .online {
+                color:            white;
+            }
+
+
+            #control > div > .fas {
+                margin-top:         25px;
+                display:            block;
+                font-size:          2em;
+            }
+
+            #control > div > .button-label {
+                font-family: 		'Roboto', sans-serif;
+                font-weight:        300;
+                font-size:          0.8em;
+                line-height:        3;
+            }
+
+
+            /* SOUND CONTORL: MAIN ===================================== */
+            #control > .muted {
+                color: white !important;
+                background-color: red !important;
+                border: 			2px solid red !important;
+            }
+
+            #control > #global-sound-on-off {
+                color: black;
+                background-color: greenyellow;
+                border: 			2px solid greenyellow;                
+            }
+
+            #control > #microphone-on-off {
+                color: black;
+                background-color: greenyellow;
+                border: 			2px solid greenyellow;                
+            }            
+            
+            /* SOUND CONTORL: CURRENT SCENE ============================ */
+            #source-control {
+                overflow-y: scroll;
+                overflow-x: hidden;
+                height: 66%;
+            }
+
+            #source-control > div {
+                width:              100%;
+            }
+
+            #source-control > div > div {
+                width:              calc( 100% - 11px );
+                height:             40px;
+                background-color:#465459;
+                border-radius: 		4px;
+                margin:             3px 2px 2px 3px;
+                text-align:         left;
+                color:            white;
+                float:              none;
+            }
+
+            #source-control > div > div > b {
+                font-family: 		'Roboto', sans-serif;
+                font-weight:        300;
+                font-size:          0.9em;
+                line-height:        2.9;
+                text-transform:     uppercase;
+                display:            block;
+                float:              left;
+            }
+
+            #source-control > div > div > i {
+                margin:             9px 8px 0px 12px;
+                font-size:          1.2em;
+                display:            block;
+                float:              left;
+            }
+
+            #source-control > div > h2 {
+                font-family: 		'Roboto', sans-serif;
+                text-transform: uppercase;
+                font-weight:        300;
+                font-size:          0.7em;
+                margin:             8px 0px 5px 0px;
+                color:            white;
+            }
+            
+            #source-control > div > .muted,
+            #source-control > div > .hided {
+                background-color:#2f3a3e;
+                color:            #596164;
+            }
+
+            #source-control > div > .refresh {
+                background-color:#229200;
+                color:            #ffffff;
+            }
+
+            #source-control > div > .browser-request {
+                background-color:#ff9c00;
+                color:            #000000;
+            }
+
+            #source-control > div > .browser-error {
+                background-color: red;
+                color:            white;
+            }
+
+
+            /* MODAL WINDOWS =========================================== */
+            #transition-select {
+                position:           absolute;
+                z-index:            20;
+                width:              100%;
+                height:             100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                display:            none;
+            }
+
+            #client-connection {
+                position:           absolute;
+                z-index:            20;
+                width:              100%;
+                height:             100%;
+                background-color: rgba(0, 0, 0, 0.9);
+                display:            none;
+            }
+
+            .modal-window {
+                display:            flex;
+                justify-content:    center;
+                align-items:        center;
+                width:              100%;
+                height:             100%;
+            }
+
+            .transition-selection {
+                width:              100%;
+                /*height:             60%;*/
+                min-height:         200px;
+                background-color: rgb( 55, 53, 75 );
+                color:            white;
+                padding:            10px 25px 10px 25px;
+            }
+
+            .transition-selection > h1, 
+            .transition-selection > h4, 
+            .transition-selection > div > div > h2, 
+            .transition-selection > div > div > h4, 
+            .transition-selection > div > div > h6 {
+                font-family: 		'Roboto', sans-serif;
+                font-weight:        200;
+            } 
+            
+            .transition-selection > h1 {
+                font-size:          1.6em;
+                text-transform:     uppercase;
+            }
+
+            .transition-selection > div > div > h2 {
+                font-weight:        500;
+                text-transform:     uppercase;
+                font-size:          1.3em;
+            }
+            
+            .transition-selection > div > div > h2, 
+            .transition-selection > div > div > h4, 
+            .transition-selection > div > div > h6 {
+                margin:             10px 10px 10px 15px;
+            } 
+            
+            .transition-selection > div > div > h4 {
+                position:           absolute;
+                bottom:             20px;
+            }
+            
+            .transition-selection > div > div > h6 {
+                position:           absolute;
+                bottom:             0;
+            } 
+
+            #transitions-list {
+                width:              100%;
+            }
+
+            #transitions-list > .transition {
+                margin:             0 10px 10px 0;
+                width:              calc( 20% - 14px );
+                min-height:         160px;
+                position:           relative;
+                float:              left;
+                display:            block;
+                border: 			2px solid #83898e;
+                border-radius: 		5px;                
+            }
+
+            #transitions-list > .current {
+                color:            black;
+                background-color: #cfcfcf;
+                border: 			2px solid #cfcfcf;
+            }
+            
+            #transitions-list > .disable {
+                color:            black;
+                background-color: rgb( 35, 35, 50 );
+                border: 			2px solid rgb( 25, 25, 35 );
+            }
+
+            /* CLIENT CONNECTION ======================================= */
+            .client-id-input {
+                width:              100%;
+                height:             45%;
+                background-color: rgb( 55, 53, 75 );
+                color:            white;
+                position:           absolute;
+            }
+
+            .client-id-input > h1,
+            .client-id-input > h5,
+            .client-id-input > p {
+                font-family: 		'Roboto', sans-serif;
+                font-weight: 300;
+                color:            white;
+                padding-left: 25px;
+            }
+
+            .client-id-input > h1 {
+                margin-block-end: 0.1em;
+            }
+
+            .client-id-input > h5 {
+                margin-block-start: 0.5em;
+                margin-block-end: 0.5em;
+            }
+
+            .client-id-input > p {
+                margin-block-start: 0.8em;
+                margin-block-end: 0.5em;
+            }
+
+            .client-id-input > form {
+                width: 90%;
+                position: absolute;
+                display: block;
+                bottom: 30px;
+                padding-left: 25px;
+            }
+
+            .client-id-input > form > div {
+                width: 20%;
+                margin-right: 5px;
+                display: inline-block;
+            }
+            
+            .client-id-input > form > p {
+                font-family: 		'Roboto', sans-serif;
+                font-weight:        300;
+                color:#ff9c00;
+                margin-block-start: 0.1em;
+                margin-block-end: 0.1em;
+            }
+            
+            .client-id-input > form > div > input,  
+            .client-id-input > form > div > label {
+                font-family: 		'Roboto', sans-serif;
+                display: block;
+            }
+
+            .client-id-input > form > div > input {
+                width: 100%;
+                font-size: 1.5em;
+            }
+
+            .client-id-input > form > div > label {
+                font-size: 0.8em;
+                text-transform: uppercase;
+                font-weight:        300;
+                margin: 5px 0px 0px 0px;
+                color: #626076;
+            }
+
+            #obs_server_address, #obs_server_port, #obs_server_password {
+                border: 2px solid white;
+                border-radius: 4px;
+                padding: 5px 5px;
+                margin: 8px 0;
+                box-sizing: border-box;
+                background-color: transparent;
+                color: white;
+            }
+
+            #connect_to_client {
+                padding: 5px 5px;
+                margin: 8px 0;
+                background-color: #626076;
+                border: none;
+                color: white;
+                text-decoration: none;
+                border: 2px solid #626076;
+                border-radius: 4px;
+                cursor: pointer;                
+            }
+
+            .test-back-1 {
+                background-color: red;
+            }
+            .test-back-2 {
+                background-color: blue;
+            }
